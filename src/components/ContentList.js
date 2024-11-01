@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import useMediaStore from './store/mediaStore';
 
 const statusOptions = ['All', 'Published', 'Draft', 'Scheduled'];
 
 const ContentList = () => {
+    const { mediaItems, fetchMediaItems } = useMediaStore();
     const [selectedStatus, setSelectedStatus] = useState('All');
 
+    useEffect(() => {
+        fetchMediaItems();
+    }, [fetchMediaItems]);
+
+    //handle status change
     const handleStatusChange = (e) => {
         setSelectedStatus(e.target.value);
     };
+    //filter media items by selected status
+    const filteredItems = selectedStatus === 'All' ? mediaItems : mediaItems.filter((item) => item.status === selectedStatus)
 
     return (
         <div className='container'>
