@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const statusOptions = ['All', 'Published', 'Draft', 'Scheduled'];
+
 const ContentList = () => {
+    const [selectedStatus, setSelectedStatus] = useState('All');
+
+    const handleStatusChange = (e) => {
+        setSelectedStatus(e.target.value);
+    };
+
     return (
         <div className='container'>
             <div className='d-flex justify-content-between'>
                 <h3>Media Content List</h3>
-                <Link className='btn btn-primary'>Add New Content</Link>
+                {/* <Link className='btn btn-primary'>Add New Content</Link> */}
 
+            </div>
+            <div className="mb-3 mt-3">
+                <label htmlFor="StatusFilter" className="form-label">Filter by Status</label>
+                <select
+                    id="StatusFilter"
+                    className="form-select"
+                    value={selectedStatus}
+                    onChange={handleStatusChange}>
+                    {statusOptions.map((status) => (
+                        <option key={status} value={status}>{status}</option>
+                    ))}
+                </select>
             </div>
             <table className='table'>
                 <thead>
