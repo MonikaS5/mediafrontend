@@ -1,10 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ContentList = () => {
     return (
         <div className='container'>
-            <div>
+            <div className='d-flex justify-content-between'>
                 <h3>Media Content List</h3>
+                <Link className='btn btn-primary'>Add New Content</Link>
+
             </div>
             <table className='table'>
                 <thead>
